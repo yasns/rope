@@ -10,13 +10,11 @@ namespace ip2
 		RopeNode *left;
 		RopeNode *right;
 
-		/** Construct a leaf node from a string fragment. */
 		explicit RopeNode(const std::string &str)
 			: data(str), weight(str.size()), left(nullptr), right(nullptr)
 		{
 		}
 
-		/** Construct an internal node with the given children and left-subtree weight. */
 		RopeNode(RopeNode *l, RopeNode *r, size_t leftWeight)
 			: data(), weight(leftWeight), left(l), right(r)
 		{
