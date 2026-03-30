@@ -39,7 +39,7 @@ int main()
         r4 = r2; // copy-assignment
         show("r4 (assigned from r2)", r4);
 
-        // Verify independence — modify original, copy must be unchanged
+        // modify original, copy must be unchanged
         r1 += "modified";
         show("r1 after += \"modified\"", r1);
         show("r3 unchanged", r3);
@@ -145,7 +145,6 @@ int main()
 
         section("12. Exception handling");
 
-        // std::out_of_range from operator-=
         try
         {
             ip2::Rope x("short");
@@ -156,7 +155,6 @@ int main()
             std::cout << "  Caught out_of_range (delete): " << e.what() << "\n";
         }
 
-        // ip2::RopeException from operator%= on empty rope
         try
         {
             ip2::Rope x;
@@ -167,7 +165,6 @@ int main()
             std::cout << "  Caught RopeException (edit empty): " << e.what() << "\n";
         }
 
-        // ip2::RopeException from operator%= overflowing bounds
         try
         {
             ip2::Rope x("Hi");
@@ -178,7 +175,6 @@ int main()
             std::cout << "  Caught RopeException (overflow): " << e.what() << "\n";
         }
 
-        // std::invalid_argument from operator[] with empty key
         try
         {
             ip2::Rope x("test");

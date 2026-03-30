@@ -31,10 +31,10 @@ namespace ip2
 	class Rope::Impl
 	{
 	public:
-		static size_t objectCount;			   ///< Number of live Impl (and therefore Rope) objects.
+		static size_t objectCount;
 		static const size_t MAX_LEAF = 16; ///< Maximum characters stored in a single leaf node.
 
-		RopeNode *root; ///< Root of the binary tree; nullptr for an empty rope.
+		RopeNode *root;
 
 		Impl()
 			: root(nullptr)
@@ -60,10 +60,6 @@ namespace ip2
 			--objectCount;
 		}
 
-		/**
-		 * Build a balanced rope tree from the substring s[start, end).
-		 * Recursively halves the range until each fragment fits in a leaf.
-		 */
 		static RopeNode *build(const std::string &s, size_t start, size_t end)
 		{
 			size_t len = end - start;
@@ -78,7 +74,6 @@ namespace ip2
 			return new RopeNode(l, r, mid - start);
 		}
 
-		/** Deep-copy a subtree; returns nullptr for nullptr input. */
 		static RopeNode *deepCopy(const RopeNode *node)
 		{
 			if (!node)
@@ -92,7 +87,6 @@ namespace ip2
 			return n;
 		}
 
-		/** Post-order delete of an entire subtree. */
 		static void destroyTree(RopeNode *node)
 		{
 			if (!node)
@@ -102,13 +96,6 @@ namespace ip2
 			delete node;
 		}
 
-		/**
-		 * Compute the total character count of a subtree.
-		 * For a leaf: weight == data.size(), so return weight directly.
-		 * For an internal node: weight == left-subtree length,
-		 * so total = weight + treeLength(right).
-		 * Traverses only the rightmost spine: O(log n) on a balanced tree.
-		 */
 		static size_t treeLength(const RopeNode *node)
 		{
 			if (!node)
@@ -118,7 +105,6 @@ namespace ip2
 			return node->weight + treeLength(node->right);
 		}
 
-		/** Append all leaf data left-to-right into out. */
 		static void flattenInto(const RopeNode *node, std::string &out)
 		{
 			if (!node)
@@ -132,7 +118,6 @@ namespace ip2
 			flattenInto(node->right, out);
 		}
 
-		/** Return the full logical string by concatenating all leaves left-to-right. */
 		std::string flatten() const
 		{
 			std::string result;
@@ -141,14 +126,12 @@ namespace ip2
 			return result;
 		}
 
-		/** Destroy the current tree and rebuild a balanced one from s. */
 		void rebuild(const std::string &s)
 		{
 			destroyTree(root);
 			root = s.empty() ? nullptr : build(s, 0, s.size());
 		}
 
-		/** Return the total number of nodes in a subtree. */
 		static int countNodes(const RopeNode *node)
 		{
 			if (node)
