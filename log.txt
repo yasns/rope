@@ -1,0 +1,69 @@
+Starting tests...
+
+  [PASS] T01  Default construction
+         empty()=true, length()=0
+
+  [PASS] T02  String construction
+         flatten()="hello", length()=5
+
+  [PASS] T03  Copy constructor — deep copy
+         copy.flatten()="abc" after original modified
+
+  [PASS] T04  Copy assignment — deep copy
+         dst.flatten()="hello" after src modified
+
+  [PASS] T05  operator+= (string append)
+         "foo" += "bar" => "foobar"
+
+  [PASS] T06  operator+= (Rope append)
+         "Hello" += ", world" => "Hello, world"
+
+  [PASS] T07  operator-= (delete range {7,6})
+         result: "Hello, world!"
+
+  [PASS] T08  operator%= (edit at pos 7)
+         result: "Hello, WORLD!"
+
+  [PASS] T09  operator+ (Rope + Rope)
+         c="foobar", a and b unchanged
+
+  [PASS] T10  operator+ (Rope + string)
+         b="Hello world", a unchanged
+
+  [PASS] T11  operator== and !=
+         x==y true, x!=z true, x==z false
+
+  [PASS] T12  operator< and >
+         apple < banana, banana > apple
+
+  [PASS] T13  operator<= and >=
+         a<=b (equal), a<=c (less), c>=a
+
+  [PASS] T14  Comparison alignment
+         != ≡ !(==),  <= ≡ !(>),  >= ≡ !(< )
+
+  [PASS] T15  operator! (clear)
+         after !r: empty()=true, length()=0
+
+  [PASS] T16  operator[] — found
+         ["quick"]=4, ["fox"]=16
+
+  [PASS] T17  operator[] — not found
+         ["xyz"] = -1
+
+  [PASS] T18  Exception out_of_range (operator-= overflow)
+         std::out_of_range thrown for range [0, 100) on len=2
+
+  [PASS] T19  Exception RopeException (edit empty rope)
+         ip2::RopeException thrown when editing empty Rope
+
+  [PASS] T20  Exception RopeException (replacement overflow)
+         ip2::RopeException thrown for 7-char replacement at pos 1 on len=2
+
+  [PASS] T21  Exception invalid_argument (empty search key)
+         std::invalid_argument thrown for operator[]("")
+
+  [PASS] T22  toString() contains nodes, len, preview
+         toString()=1,5:Hello
+
+Results: 22 passed, 0 failed
